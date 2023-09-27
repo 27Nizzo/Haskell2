@@ -2,7 +2,7 @@
 
 data Semaforo = Verde | Amarelo | Vermelho deriving (Show,Eq)
 
-safe :: Semaforo -> Semaforo -> Bool
+safe :: Secd maforo -> Semaforo -> Bool
 safe a b = if a == Amarelo && b == Verde 
             then True
             else if a == Verde && b == Vermelho
