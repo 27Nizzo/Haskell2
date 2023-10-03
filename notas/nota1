@@ -1,0 +1,7 @@
+Graham Mutton's approach to recursion:
+
+1 -> Escrever o nome e o tipo da função;
+2 -> Escrever os casos;
+3 -> Definir os casos básicos;
+4 -> Definir os casos de recursão;
+5 -> Gerneralizar e simplificar;
