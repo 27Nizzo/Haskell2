@@ -4,4 +4,5 @@ sumTriplos [] = (0,0,0)
   --  let (a,b,c) = sumTriplos t
     --in (a1 + a, b1 + b, c1 + c)
 
-sumTriplos((a,b,c):(d,e,f):t) = (a + d + (sumTriplos t), b + e + (sumTriplos t), c + f + (sumTriplos t))
+sumTriplos((a,b,c):t) = (a + sumA, b + sumB, c + sumC)
+  where (sumA,sumB,sumC) = sumTriplos t
