@@ -1,0 +1,1 @@
+-- defina a função fun que recebe uma lista de triplos e produz a lista de pares
