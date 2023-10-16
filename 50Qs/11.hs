@@ -11,5 +11,5 @@ takee x (h:t) | h == x = h : takee x t
 
 dropp :: Eq a => a -> [a] -> [a]
 dropp _ [] = []
-dropp x (h:t) | h == x = dropp x t 
-              | otherwise = (h:t)
+dropp x (h:t) | h == x = dropp x t
+              | otherwise = h:t
