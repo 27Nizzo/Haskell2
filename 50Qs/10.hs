@@ -4,4 +4,4 @@
 interspace2 :: a -> [a] -> [a]
 interspace2 _ [] = []
 interspace2 n [x] = [x]
-interspace2 n (h:t) = h : t : interspace2 n t 
+interspace2 n (h:t) = h : n : interspace2 n t 
