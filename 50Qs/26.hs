@@ -1,4 +1,3 @@
-import Control.Exception (BlockedIndefinitelyOnMVar)
 nubb :: Eq a => [a] -> [a]
 nubb [] = []
 nubb [x] = [x]

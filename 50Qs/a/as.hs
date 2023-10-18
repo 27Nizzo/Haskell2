@@ -72,3 +72,54 @@ concatt :: [[a]] -> [a]
 concatt [[]] = []
 concatt [[x]] = [x]
 concatt (h:t) = h ++ concatt t
+
+--13)
+initss :: [a] -> [[a]]
+initss [] = []
+initss l = initss (retiraUltt l) ++ [l]
+
+retiraUltt :: [a] -> [a]
+retiraUltt [x] = []
+retiraUltt (h:t) = h : retiraUltt t
+
+--14) 
+tailss :: [a] -> [[a]]
+tailss [] = [[]]
+tailss (h:t) = (h:t) : tailss t
+
+--15)
+headss :: [[a]] -> [a]
+headss [] = []
+headss ([]:t) = headss t
+headss ((x:xs):t) = x : headss t  
+
+--16)
+totall :: [[a]] -> Int
+totall [] = 0
+totall (h:t) = length(h:t) + totall t
+
+--17)
+funn :: [(a,b,c)] -> [(a,c)]
+funn [] = []
+funn ((a,b,c):t) = (a,c) : funn t
+
+--18)
+colaa :: [(String,b,c)] -> String
+colaa [] = ""
+colaa ((a,b,c):t) = a ++ colaa t
+
+--19) 
+idade :: Int -> Int -> [(String,Int)] -> [String]
+idade _ _ [] = []
+idade ano id ((x,xs):t) = if ano - xs >= id then x : idade ano id t
+                          else idade ano id t
+
+--20)
+powerEnumFromm :: Int -> Int -> [Int]
+powerEnumFromm 0 0 = [0]
+powerEnumFromm n m = aux n m 0
+
+aux :: Int -> Int -> Int -> [Int]
+aux n m acc = if acc /= m then n^acc : aux n m (acc+1)
+              else []
+

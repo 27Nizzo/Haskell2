@@ -1,8 +1,9 @@
-{-# OPTIONS_GHC -Wno-overlapping-patterns #-}
-isSuffixOf1 :: Eq a => [a] -> [a] -> Bool
-isSuffixOf1 [] [] = True
-isSuffixOf1 l [] = False
-isSuffixOf1 (x:y) (xs:ys) = if x == xs then isSuffixOf1 y ys else isSuffixOf1(x:y) ys
+isSuffixOf1 :: Eq a => [a]-> [a] -> Bool
+isSuffixOf1 _ [] = error "O sufixo a ser testado excede a lista"
+isSuffixOf1 lista1 lista2@(y:ys) = if length lista1 == length lista2
+    then isPrefixOf1 lista1 lista2
+    else isSuffixOf1 lista1 ys
 
--- é true quando [20,30] [10,20,30]
--- é false quando [10,30] [10,20,30]
+    isPrefixOf1 :: Eq a => [a] -> [a] -> Bool
+isPrefixOf1 [] l = True
+isPrefixOf1 (a:as) (b:bs) = (a == b) && isPrefixOf1 as bs
