@@ -74,17 +74,20 @@ intersperse' n (h:t) = h : n : intersperse' n t
 -- 11
 -- Por exemplo, group [1,2,2,3,4,4,4,5,4] corresponde a [[1],[2,2],[3],[4,4,4],[5],[4]].
 group' :: Eq a => [a] -> [[a]]
-group' (h:t) = let (grouped, rest) = group'aux [h] t
-    in if rest == [] 
-        then [grouped]
-        else grouped : group' rest
+group' [] = [[]]
+group' [x] = [[x]]
+group' (h:t) = take1 h (h:t) : drop1(h t)
 
-group'aux (x:xs) [] = ((x:xs), [])
-group'aux (x:xs) (y:ys)
-    | x == y = group'aux (y:x:xs) ys
-    | otherwise = ((x:xs), (y:ys))
+take1 :: Eq a => a -> [a] -> [a]
+take1 _ [] = []
+take1 x (h:t) | h == x = h : take x t
+                | otherwise = []
 
-
+drop1 :: Eq a => a -> [a] -> [a]
+drop1 _ [] = []
+drop1 x (h:t) | h == x = drop1 
+                | otherwise = h:t
+                
 -- 12
 -- Por exemplo, concat [[1],[2,2],[3],[4,4,4],[5],[4]] corresponde a [1,2,2,3,4,4,4,5,4].
 concat' :: [[a]] -> [a]
