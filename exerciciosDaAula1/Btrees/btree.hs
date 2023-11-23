@@ -9,6 +9,6 @@ a = Node 30 a1 a2
 a1 = Node 20
             (Node 10 Empty Empty) Empty
 a2 = Node 64 (Node 45 
-                    (Node Empty Empty)
+                    (Node 40 Empty Empty)
                     (Node 50 Empty Empty))
                         (Node 78 Empty Empty)

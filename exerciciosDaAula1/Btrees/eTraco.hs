@@ -10,12 +10,10 @@ a2 = Node 64 (Node 45
                     (Node 50 Empty Empty))
                         (Node 78 Empty Empty)
 
-contanodes :: Btree a -> Int
-contanodes Empty = 0
-contanodes (Node r e d) = 1 + contanodes e + contanodes d
+-- Verifica se o caule pertence à folha ou vice versa
 
-
-nFolhas :: Btree a -> Int
-nFolhas Empty = 0
-nFolhas (Node r Empty Empty) = 1 
-nFolhas (Node r e d) = nFolhas e + nFolhas d 
+eTraco :: Eq a => [a] -> Btree a -> Bool
+eTraco [] Empty = True
+eTraco [] _ = False 
+eTraco (h:t) Empty = False 
+eTraco (h:t) (Node r e d) = (h == r) && (eTraco t e || eTraco t d)

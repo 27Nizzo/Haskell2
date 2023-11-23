@@ -10,12 +10,8 @@ a2 = Node 64 (Node 45
                     (Node 50 Empty Empty))
                         (Node 78 Empty Empty)
 
-contanodes :: Btree a -> Int
-contanodes Empty = 0
-contanodes (Node r e d) = 1 + contanodes e + contanodes d
-
-
-nFolhas :: Btree a -> Int
-nFolhas Empty = 0
-nFolhas (Node r Empty Empty) = 1 
-nFolhas (Node r e d) = nFolhas e + nFolhas d 
+folhas :: Btree a -> [a]
+-- folhas a = [10, 40, 50, 78]
+folhas Empty = []
+folhas (Node r Empty Empty) = [r]
+folhas (Node r e d) = folhas e ++ folhas d

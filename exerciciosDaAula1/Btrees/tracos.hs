@@ -1,3 +1,4 @@
+
 data Btree a = Empty 
                 | Node a (Btree a) (Btree a)
 
@@ -10,12 +11,7 @@ a2 = Node 64 (Node 45
                     (Node 50 Empty Empty))
                         (Node 78 Empty Empty)
 
-contanodes :: Btree a -> Int
-contanodes Empty = 0
-contanodes (Node r e d) = 1 + contanodes e + contanodes d
-
-
-nFolhas :: Btree a -> Int
-nFolhas Empty = 0
-nFolhas (Node r Empty Empty) = 1 
-nFolhas (Node r e d) = nFolhas e + nFolhas d 
+tracos :: Btree a -> [[a]]
+tracos Empty = [[]]
+tracos (Node r Empty Empty) = [[r]]
+tracos (Node r e d) = map(r:) (tracos e) ++ (tracos d)
