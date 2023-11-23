@@ -11,10 +11,9 @@ a2 = Node 64 (Node 45
                         (Node 78 Empty Empty)
 
 
-procura :: Eq a => a -> Btree a -> Bool
+procura :: Ord a => a -> Btree a -> Bool
 procura _ Empty = False 
 procura x (Node r e d) 
                         | x == r = True
                         | x < r = procura x e
-                        | x > r = procura x d
--- Fazer dps
+                        | otherwise = procura x d
