@@ -31,3 +31,7 @@
     span' f (h:t) | f h = (h:a,b)
                   | otherwise = ([], (h:t))
                   where (a,b) = span' f t
+
+--f) 
+    deleteBy' :: (a -> a -> Bool) -> a -> [a] -> [a]
+    deleteBy' 
