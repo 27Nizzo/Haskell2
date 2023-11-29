@@ -103,15 +103,79 @@
     
 
     ordena' :: Polinomio -> Polinomio 
-    ordena' pol = foldr zux [] pol 
+    ordena' pol = foldr aux [] pol 
             where aux :: Monomio -> Polinomio -> Polinomio
                   aux (cm,gm) [] = [(cm,gm)]
                   aux (cm,gm) ((cm2,gm2):t) = if gm < gm2 then (cm,gm) : (cm2,gm2) : t else (cm2,gm2) : aux (cm,gm) t
                   
 --i) Normaliza um polinómio
- 
+
     normaliza :: Polinomio -> Polinomio 
     normaliza l = let x = fromIntegral $ grau l in [((a/x),b) | (a,b) <- l]
 
+--j) Soma de dois Polinomios de forma que se os polinomios que a função recebe estiveram normalizados produz também um polinomio normalizado
 
+    soma' :: Polinomio -> Polinomio -> Polinomio
+    soma' pol1 pol2 = normaliza $ (++) pol1 pol2
 
+--l) Que testa se dois Polinómios são equivalentes
+
+    equiv :: Polinomio -> Polinomio -> Bool 
+    equiv pol1 pol2 = ordena(normaliza pol1) == ordena(normaliza pol2)
+
+--3) Considere a seguinte definição para representar matrizes:
+
+    type Mat a = [[a]]
+
+{- Por exemplo, a matriz (triangular superior)
+
+|1 2 3|
+|0 4 5|
+|0 0 6|
+
+seria representada por [[1,2,3], [0,4,5], [0,0,6]]
+
+Defina as seguintes funções sobre matrizes (use, sempre que achar apropriado, funções
+de ordem superior).
+
+ (a) dimOK :: Mat a -> Bool que testa se uma matriz está bem construída (i.e., se
+todas as linhas têm a mesma dimensão). -}
+
+    dimOk :: Mat a -> Bool 
+    dimOk (l:rl) = all(\l1 -> length l == length l1) rl
+    -- l -> a primeira linha 
+    -- l1 -> linha seguinte de l 
+    -- rl -> resto das linhas
+    -- Esta faz uma comparação entre a primeira linha e a seguinte para verificar se têm o mesmo tamanho, se for verdade retorna True se for faslso retorna False
+
+-- (b) Calcula a dimensão de uma matriz
+
+    dimMat :: Mat a -> (Int,Int)
+    dimMat (l:rl) = (length l, length (l:rl))
+    --Compara o tamaho das linhas e das colunas
+    -- l -> Representa as linhas da matriz
+    --(l:rl) -> Representa as colunas da matriz
+
+-- (c) Adiciona matrizes
+
+    addMat :: Num a => Mat a -> Mat a -> Mat a
+    addMat m1 m2 = zipWith'(\l1 l2 -> zipWith' (+) l1 l2) m1 m2
+    {-    addMat m1 m2 | dimensionMatch m1 m2 = Just (zipWith'(\l1 l2 -> zipWith' (+) l1 l2) m1 m2)
+                 | otherwise = Nothing
+
+    dimensionMatch :: Mat a -> Mat a -> Bool
+    dimensionMatch m1 m2 = length m1 == length m2 && all(\row1 -> length row1 == length (head m2)) m1-}
+
+-- (d) Calcula a transposta de uma matriz
+
+    transpose' :: Mat a -> Mat a 
+    transpose' ([]:_) = []
+    transpose' m = let l = map head m 
+                       rl = map tail m 
+                    in l : transpose' rl
+
+-- (e) Multiplica Matrizes 
+     multMat :: Num a => Mat a -> Mat a -> Mat a 
+     multMat m1 m2 = zipWith'(\l1 l2 -> zipWith' (*) l1 l2) m1 m2
+                    
+    
