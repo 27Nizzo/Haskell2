@@ -175,7 +175,20 @@ todas as linhas têm a mesma dimensão). -}
                     in l : transpose' rl
 
 -- (e) Multiplica Matrizes 
-     multMat :: Num a => Mat a -> Mat a -> Mat a 
-     multMat m1 m2 = zipWith'(\l1 l2 -> zipWith' (*) l1 l2) m1 m2
+  --multMat' :: Num a => Mat a -> Mat a -> Mat a 
+  --multMat' m1 m2 = zipWith' (\row1 row2 -> zipWith' (*) row1 row2) m1 (transpose m2)
+
                     
-    
+-- (f) Função que defina uma função que adiciona duas matrizes
+
+    zipWMat :: (a -> b -> c) -> Mat a -> Mat b -> Mat c
+    zipWMat f m1 m2 = zipWith'(\l1 l2 -> zipWith' f l1 l2) m1 m2
+
+-- (g) Função que testa se a matriz é uma matriz triangular superior 
+
+isUpperTriangular' :: (Num a, Eq a) => Mat a -> Bool
+isUpperTriangular' matrix = allZerosBelowDiagonal $ lowerTriangularIndices matrix
+  where
+    numRows = length matrix
+    allZerosBelowDiagonal indices = all (\(i, j) -> matrix !! i !! j == 0) indices
+    lowerTriangularIndices mat = [(i, j) | i <- [0..numRows - 1], j <- [0..i - 1]]
