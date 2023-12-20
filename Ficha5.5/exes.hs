@@ -92,6 +92,57 @@
     multPorMonomio :: Polinomio -> (Float, Int) -> Polinomio 
     multPorMonomio pol (coefM, expM) = map(\(coef, exp) -> (coef * coefM, exp + expM)) pol 
 
---j) 
+--l) 
     equiv :: Polinomio -> Polinomio -> Bool 
     equiv pol1 pol2 = ordena(normaliza pol1) == ordena(normaliza pol2)
+
+--3) 
+
+    type Mat a = [[a]]
+  
+{-
+Por exemplo, a matriz (triangular superior):
+
+[1 2 3]
+[0 4 5]
+[0 0 6], seria representada por: [[1,2,3], [0,4,5], [0,0,6]]
+-}
+
+--a) 
+    dimOk :: Mat a -> Bool 
+    dimOk (l:rl) = all(\l1 -> length l == length l1) rl
+
+--b) 
+    dimMat :: Mat a -> (Int,Int)
+    dimMat (l:rl) = (length l, length (l:rl)) 
+
+--c) 
+    addMat :: Num a => Mat a -> Mat a -> Mat a 
+    addMat m1 m2 = zipWith2 (\l1 l2 -> zipWith2 (+) l1 l2) m1 m2
+    
+--d) 
+    transpose' :: Mat a -> Mat a
+    transpose' ([]:_) = []
+    transpose' m = 
+            let l = map head m 
+                rl = map tail m 
+            in l : transpose' rl 
+
+--e) 
+    multMat :: Num a => Mat a -> Mat a -> Mat a
+    multMat m1 m2 = zipWith2 (\l1 l2 -> zipWith2 (*) l1 l2) m1 m2
+
+--f) 
+    zipMat  :: (a -> b -> c) -> Mat a -> Mat b -> Mat c
+    zipMat f m1 m2 = zipWith2 (\l1 l2 -> zipWith2 f l1 l2) m1 m2
+
+--g) 
+
+--??
+
+    triSup :: (Num a, Ord a) => Mat a -> Bool
+    triSup mat = all isZeroBelowDiagonal mat
+     where
+    isZeroBelowDiagonal row = and $ zipWith (\j x -> if j < length row then x <= 0 else True) [0..] row
+    
+--??
