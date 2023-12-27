@@ -76,6 +76,22 @@
         in case aluno of 
             (_,_,_,Aprov nota) -> (fromIntegral nota + somaDasNotasE + somaDasNotasD, 1 + totalE + totalD)
             (_,_,_,_) -> (somaDasNotasE + somaDasNotasD, 1 + totalE + totalD)
+
+    --g)
+    aprovAv :: Turma -> Float 
+    aprovAv Empty = 0 
+    aprovAv turma = (aprovados / totalDeAlunos) * 100 
+        where (aprovados, totalDeAlunos) = contarAprovados turma 
+
+    contarAprovados :: Turma -> (Float, Float) 
+    contarAprovados Empty = (0,0) 
+    contarAprovados (Node aluno e d) = 
+        let (aprovadosE, totalE) = contarAprovados e 
+            (aprovadosD, totalD) = contarAprovados d 
+        in case aluno of 
+            (_,_,_,Aprov _) -> (1 + aprovadosE + aprovadosD, 1 + totalE + totalD)
+            (_,_,_,_) -> (aprovadosE + aprovadosD, 1 + totalE + totaD)
             
+
 
     
