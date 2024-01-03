@@ -17,7 +17,7 @@ acrescentados à esquerda(Esq) ou à direita(Dir) da lista. Nula representa a li
     instance Show a => Show (Lista a) where
         show Nula = "[]"
         show (Esq x Nula) = show x
-        show (Dir Nula x) = show x 
+       -- show (Dir Nula x) = show x 
         show (Esq x xs) = show x ++ ", " ++ showLista xs 
         show (Dir x xs) = show xs ++ ", " ++ show x 
 
