@@ -26,3 +26,33 @@
     concat1 [[x]] = [x]
     concat1 (h:t) = 
         h ++ concat1 t 
+    
+    initss :: [a] -> [[a]]
+    initss [] = [[]]
+    initss l = initss (retiraUlt l) ++ [l]
+
+    retiraUlt :: [a] -> [a]
+    retiraUlt [x] = []
+    retiraUlt (h:t) = h : retiraUlt t
+
+    tailss :: [a] -> [[a]]
+    tailss [] = [[]]
+    tailss (h:t) = [(h:t)] ++ tailss t
+
+    headss :: [[a]] -> [a]
+    headss [] = []
+    headss [[x]] = [x]
+    headss ([]:t) = headss t
+    headss ((h:t):ts) = h : headss ts  
+
+    total :: [[a]] -> Int 
+    total [] = 0 
+    total (h:t) = length(h) + total t 
+
+    fun :: [(a,b,c)] -> [(a,c)]
+    fun [] = []
+    fun ((a,b,c):t) = (a,c) : fun t 
+
+    cola :: [(String,b,c)] -> String 
+    cola [] = ""
+    cola ((a,b,c):t) = a ++ cola t
