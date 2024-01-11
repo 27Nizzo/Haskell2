@@ -13,6 +13,14 @@
     a2 = Node 64 (Node 45 (Node 40 Empty Empty) (Node 50 Empty Empty))
              (Node 78 Empty Empty)
 
+    -- Exemplo de utilização com uma função que soma os elementos
+    tree1 :: BTree Int
+    tree1 = Node 1 (Node 2 (Node 3 Empty Empty) (Node 4 Empty Empty)) (Node 5 Empty Empty)
+
+    tree2 :: BTree Double
+    tree2 = Node 2.5 (Node 1.5 Empty Empty) (Node 3.5 Empty Empty)
+
+
 -- a) 
     altura :: BTree a -> Int 
     altura Empty = 0
