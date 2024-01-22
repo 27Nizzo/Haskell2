@@ -33,5 +33,5 @@ tempoEsp ((H a b):(H as bs):t) = (horasMinutos(as) + bs) - (horasMinutos(a) + b)
 
 tempoTot :: Viagem -> Int
 tempoTot [] = 0
-tempoTot [viagem] = tempoEf viagembla
+tempoTot [viagem] = tempoEf viagem
 tempoTot viagem = tempoEf viagem + tempoEsp viagem 
