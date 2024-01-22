@@ -138,11 +138,9 @@ Por exemplo, a matriz (triangular superior):
 
 --g) 
 
---??
 
     triSup :: (Num a, Ord a) => Mat a -> Bool
     triSup mat = all isZeroBelowDiagonal mat
      where
     isZeroBelowDiagonal row = and $ zipWith (\j x -> if j < length row then x <= 0 else True) [0..] row
     
---??
