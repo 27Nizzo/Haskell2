@@ -25,14 +25,18 @@
 
         
 --c) 
-    --  [(’c’,7),(’a’,3),(’d’,5)] corresponde a [(’c’,8),(’a’,7),(’d’,5),(’b’,2)]
+    -- uniaoMSet [('b',2),('a',4),('c',1)] [(’c’,7),(’a’,3),(’d’,5)] corresponde a [(’c’,8),(’a’,7),(’d’,5),(’b’,2)]
 
     uniaoMSet :: Eq a => MSet a -> MSet a -> MSet a
-    uniaoMSet xs [] = xs 
-    uniaoMSet [] ys = ys 
-    uniaoMSet ((h,hs):xs) ((t,ts):ys) =
-        if h == t then (hs + ts) : uniaoMSet hs ts 
-        else if h < t then (h,hs) : uniaoMSet xs ((t,ts):ys) 
-        else (t,ts) : uniaoMSet ((h,hs):xs) ys 
+    uniaoMSet t [] = t 
+    uniaoMSet [] ts = ts 
+    uniaoMSet ((e1,n1):t) ((e2,n2):ts) = 
+        if e1 == e2 
+            then (e1, n1 + n2) : uniaoMSet t ts 
+        else 
+        if e1 /= e2 
+            then (e1,n1) : uniaoMSet t ((e2,n2):ts)
+        else 
+        (e2,n2) : uniaoMSet ((e1,n1):t) ts
 
         
