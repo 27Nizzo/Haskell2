@@ -12,4 +12,5 @@
     -- max é uma função que procura o maximo / o maior valor em listas binarias
 
     prune :: Int -> RTree a -> RTree a 
-    prune 
+    prune 0 (R a []) = R a []
+    prune n (R a l) = R a (map(prune(n-1)) l)
