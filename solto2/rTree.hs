@@ -14,3 +14,11 @@
     prune :: Int -> RTree a -> RTree a 
     prune 0 (R a []) = R a []
     prune n (R a l) = R a (map(prune(n-1)) l)
+
+
+    mirror :: RTree a -> RTree a 
+    mirror (R a l) = R a (map (mirror)(reverse l))
+
+    postOrder :: RTree a -> [a]
+    postOrder (R a []) = [a]
+    postOrder (R a (h:t)) = postOrder h ++ postOrder (R a t)
